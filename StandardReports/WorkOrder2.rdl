@@ -5,7 +5,7 @@
     <DataSource Name="QueryDataSource">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=WATSON;Initial Catalog=PortDemo</ConnectString>
+        <ConnectString>Data Source=v-katich; Initial Catalog="russ255"; User ID=ConquestMobile; Password=cm</ConnectString>
         <IntegratedSecurity>true</IntegratedSecurity>
       </ConnectionProperties>
       <rd:SecurityType>Integrated</rd:SecurityType>
@@ -16,78 +16,89 @@
     <DataSet Name="PrimaryDataSet">
       <Query>
         <DataSourceName>QueryDataSource</DataSourceName>
-        <CommandText>SELECT        dbo.tblActRequest.ReferenceID, dbo.tblActRequest.Salutation, dbo.tblActRequest.FirstName, dbo.tblActRequest.LastName, dbo.tblActRequest.Address, 
-                         dbo.tblActRequest.Suburb, dbo.tblActRequest.Request, dbo.tblActRequest.EntryDate, dbo.tblActRequest.PostCode, dbo.tblActRequest.HomePhone, 
-                         dbo.tblActRequest.WorkPhone, dbo.tblActRequest.MobilePhone, tblCode_2.Text AS Received, tblCode_1.Text AS Urgent, dbo.tblObs.OBSName, 
-                         dbo.tblActRequest.Location
-FROM            dbo.tblActRequest LEFT OUTER JOIN
-                         dbo.tblCode AS tblCode_1 ON dbo.tblActRequest.Urgency = tblCode_1.CodeID LEFT OUTER JOIN
-                         dbo.tblCode AS tblCode_2 ON dbo.tblActRequest.RecMeth = tblCode_2.CodeID LEFT OUTER JOIN
-                         dbo.tblObs ON dbo.tblActRequest.AssignTo = dbo.tblObs.OrgID</CommandText>
+        <CommandText>SELECT        dbo.tblAction.ActionID, dbo.tblAction.ActionDescription, dbo.tblAction.AssetID, dbo.tblAction.ActionNotes, dbo.tblAction.StartDate, dbo.tblAction.ParentLvl, 
+                         dbo.tblAction.FinishDate, dbo.tblActionTask.TaskName, dbo.tblObs.OBSName AS Dept, dbo.tblCode.Text AS Urgency, dbo.tblAsset.FamilyCode, 
+                         dbo.tblAction.Location, dbo.tblContractor.Contractor, dbo.tblContractor.address, dbo.tblContractor.suburb, dbo.tblContractor.Contact, dbo.tblAsset.AssetDescription, 
+                         dbo.tblAction.ReferenceID
+FROM            dbo.tblAction LEFT OUTER JOIN
+                         dbo.tblActionTask ON dbo.tblAction.ActionID = dbo.tblActionTask.ActionID LEFT OUTER JOIN
+                         dbo.tblObs ON dbo.tblAction.Department = dbo.tblObs.OrgID LEFT OUTER JOIN
+                         dbo.tblCode ON dbo.tblAction.Urgency = dbo.tblCode.CodeID LEFT OUTER JOIN
+                         dbo.tblAsset ON dbo.tblAction.AssetID = dbo.tblAsset.AssetID LEFT OUTER JOIN
+                         dbo.tblContractor ON dbo.tblAction.ContractID = dbo.tblContractor.contractID
+WHERE        (dbo.tblAction.ActionID = 66)</CommandText>
       </Query>
       <Fields>
-        <Field Name="ReferenceID">
-          <DataField>ReferenceID</DataField>
+        <Field Name="ActionID">
+          <DataField>ActionID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ActionDescription">
+          <DataField>ActionDescription</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Salutation">
-          <DataField>Salutation</DataField>
+        <Field Name="AssetID">
+          <DataField>AssetID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ActionNotes">
+          <DataField>ActionNotes</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="FirstName">
-          <DataField>FirstName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="LastName">
-          <DataField>LastName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Address">
-          <DataField>Address</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Suburb">
-          <DataField>Suburb</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Request">
-          <DataField>Request</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="EntryDate">
-          <DataField>EntryDate</DataField>
+        <Field Name="StartDate">
+          <DataField>StartDate</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
-        <Field Name="PostCode">
-          <DataField>PostCode</DataField>
+        <Field Name="ParentLvl">
+          <DataField>ParentLvl</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="FinishDate">
+          <DataField>FinishDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Taskname">
+          <DataField>TaskName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="HomePhone">
-          <DataField>HomePhone</DataField>
+        <Field Name="Dept">
+          <DataField>Dept</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="WorkPhone">
-          <DataField>WorkPhone</DataField>
+        <Field Name="Urgency">
+          <DataField>Urgency</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="MobilePhone">
-          <DataField>MobilePhone</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Received">
-          <DataField>Received</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Urgent">
-          <DataField>Urgent</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="OBSName">
-          <DataField>OBSName</DataField>
+        <Field Name="FamilyCode">
+          <DataField>FamilyCode</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Location">
           <DataField>Location</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Contractor">
+          <DataField>Contractor</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="address">
+          <DataField>address</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="suburb">
+          <DataField>suburb</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Contact">
+          <DataField>Contact</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="AssetDescription">
+          <DataField>AssetDescription</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ReferenceID">
+          <DataField>ReferenceID</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
@@ -97,27 +108,27 @@ FROM            dbo.tblActRequest LEFT OUTER JOIN
     <ReportSection>
       <Body>
         <ReportItems>
-          <Textbox Name="ReferenceID">
+          <Textbox Name="Textbox6">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!ReferenceID.Value, "PrimaryDataSet")</Value>
+                    <Value>To:</Value>
                     <Style>
-                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>ReferenceID</rd:DefaultName>
-            <Top>0.56125in</Top>
-            <Left>1.16445in</Left>
+            <rd:DefaultName>Textbox6</rd:DefaultName>
+            <Top>0.08333in</Top>
+            <Left>0.01389in</Left>
             <Height>0.25in</Height>
-            <Width>1.12847in</Width>
+            <Width>0.34375in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -128,28 +139,25 @@ FROM            dbo.tblActRequest LEFT OUTER JOIN
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="EntryDate">
+          <Textbox Name="Contractor">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!EntryDate.Value, "PrimaryDataSet")</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                      <Format>d</Format>
-                    </Style>
+                    <Value>=Fields!Contractor.Value</Value>
+                    <Style />
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>EntryDate</rd:DefaultName>
-            <Top>0.56125in</Top>
-            <Left>4.0325in</Left>
-            <Height>0.25in</Height>
-            <Width>1in</Width>
+            <rd:DefaultName>Contractor</rd:DefaultName>
+            <Top>0.08333in</Top>
+            <Left>0.42708in</Left>
+            <Height>0.23376in</Height>
+            <Width>2.64522in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -161,28 +169,25 @@ FROM            dbo.tblActRequest LEFT OUTER JOIN
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="EntryDate2">
+          <Textbox Name="address">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!EntryDate.Value, "PrimaryDataSet")</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                      <Format>T</Format>
-                    </Style>
+                    <Value>=Fields!address.Value</Value>
+                    <Style />
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>EntryDate</rd:DefaultName>
-            <Top>0.56125in</Top>
-            <Left>6.73833in</Left>
-            <Height>0.25in</Height>
-            <Width>1in</Width>
+            <rd:DefaultName>address</rd:DefaultName>
+            <Top>0.34486in</Top>
+            <Left>0.42708in</Left>
+            <Height>0.23375in</Height>
+            <Width>2.64522in</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -194,69 +199,30 @@ FROM            dbo.tblActRequest LEFT OUTER JOIN
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox5">
+          <Textbox Name="suburb">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>REQUEST No:</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>0.56125in</Top>
-            <Left>0.095in</Left>
-            <Height>0.25in</Height>
-            <Width>1in</Width>
-            <ZIndex>3</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox6">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>SECTION A - CUSTOMER REQUEST</Value>
-                    <Style>
-                      <FontSize>14pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                      <Color>White</Color>
-                    </Style>
+                    <Value>=Fields!suburb.Value</Value>
+                    <Style />
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>0.11334in</Top>
-            <Left>0in</Left>
-            <Height>0.33333in</Height>
-            <Width>7.94792in</Width>
-            <ZIndex>4</ZIndex>
+            <rd:DefaultName>suburb</rd:DefaultName>
+            <Top>0.5925in</Top>
+            <Left>0.42709in</Left>
+            <Height>0.23612in</Height>
+            <Width>2.64522in</Width>
+            <ZIndex>3</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <BackgroundColor>#384c70</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -270,281 +236,54 @@ FROM            dbo.tblActRequest LEFT OUTER JOIN
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>DATE RECIEIVED:</Value>
+                    <Value>ASSET REFERENCE</Value>
                     <Style>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>White</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox7</rd:DefaultName>
-            <Top>0.56125in</Top>
-            <Left>2.83111in</Left>
+            <rd:DefaultName>Textbox6</rd:DefaultName>
+            <Top>1.35639in</Top>
+            <Left>0.03528cm</Left>
+            <Height>0.33333in</Height>
+            <Width>7.39757in</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <BackgroundColor>#215e89</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Location">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Location.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Location</rd:DefaultName>
+            <Top>1.83951in</Top>
+            <Left>0.86333in</Left>
             <Height>0.25in</Height>
-            <Width>1.11555in</Width>
+            <Width>6.54813in</Width>
             <ZIndex>5</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox8">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>TIME RECIEIVED:</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox7</rd:DefaultName>
-            <Top>0.56125in</Top>
-            <Left>5.55334in</Left>
-            <Height>0.25in</Height>
-            <Width>1.11555in</Width>
-            <ZIndex>6</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Received">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!Received.Value, "PrimaryDataSet")</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Received</rd:DefaultName>
-            <Top>0.95709in</Top>
-            <Left>1.16445in</Left>
-            <Height>0.25in</Height>
-            <Width>1.94792in</Width>
-            <ZIndex>7</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox9">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>RECEIVED BY:</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>0.95709in</Top>
-            <Left>0.095in</Left>
-            <Height>0.25in</Height>
-            <Width>1in</Width>
-            <ZIndex>8</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox10">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>CONTACT PHONE:</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>0.95709in</Top>
-            <Left>5.71354in</Left>
-            <Height>0.25in</Height>
-            <Width>1.19792in</Width>
-            <ZIndex>9</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="HomePhone">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!HomePhone.Value, "PrimaryDataSet")</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>HomePhone</rd:DefaultName>
-            <Top>1.32167in</Top>
-            <Left>6.25917in</Left>
-            <Height>0.25in</Height>
-            <Width>1.47917in</Width>
-            <ZIndex>10</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="MobilePhone">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!MobilePhone.Value, "PrimaryDataSet")</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>MobilePhone</rd:DefaultName>
-            <Top>1.96056in</Top>
-            <Left>6.25917in</Left>
-            <Height>0.25in</Height>
-            <Width>1.47917in</Width>
-            <ZIndex>11</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="WorkPhone">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!WorkPhone.Value, "PrimaryDataSet")</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>WorkPhone</rd:DefaultName>
-            <Top>1.64111in</Top>
-            <Left>6.25917in</Left>
-            <Height>0.25in</Height>
-            <Width>1.47917in</Width>
-            <ZIndex>12</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox11">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>HOME:</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>1.32167in</Top>
-            <Left>5.55334in</Left>
-            <Height>0.25in</Height>
-            <Width>0.47271in</Width>
-            <ZIndex>13</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -562,23 +301,114 @@ FROM            dbo.tblActRequest LEFT OUTER JOIN
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>BUSINESS:</Value>
+                    <Value>Location</Value>
                     <Style>
-                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox12</rd:DefaultName>
+            <Top>1.83951in</Top>
+            <Left>0.06472in</Left>
+            <Height>0.25in</Height>
+            <Width>0.72917in</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Contact">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Contact.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Contact</rd:DefaultName>
+            <Top>0.82861in</Top>
+            <Left>0.42709in</Left>
+            <Height>0.23612in</Height>
+            <Width>2.64522in</Width>
+            <ZIndex>7</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox8">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Attn:</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox6</rd:DefaultName>
+            <Top>0.82861in</Top>
+            <Height>0.23612in</Height>
+            <Width>0.38542in</Width>
+            <ZIndex>8</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="AssetID">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!AssetID.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
                 <Style>
-                  <TextAlign>Right</TextAlign>
+                  <TextAlign>Left</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>1.64111in</Top>
-            <Left>5.25125in</Left>
+            <rd:DefaultName>AssetID</rd:DefaultName>
+            <Top>2.15895in</Top>
+            <Left>0.70361in</Left>
             <Height>0.25in</Height>
-            <Width>0.77479in</Width>
-            <ZIndex>14</ZIndex>
+            <Width>0.57356in</Width>
+            <ZIndex>9</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -596,89 +426,21 @@ FROM            dbo.tblActRequest LEFT OUTER JOIN
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>MOBILE:</Value>
+                    <Value>Asset ID</Value>
                     <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>1.96056in</Top>
-            <Left>5.43875in</Left>
-            <Height>0.25in</Height>
-            <Width>0.58729in</Width>
-            <ZIndex>15</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox14">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>NAME:</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>1.32167in</Top>
-            <Left>0.62229in</Left>
-            <Height>0.25in</Height>
-            <Width>0.47271in</Width>
-            <ZIndex>16</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Salutation">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=ltrim(First(Fields!Salutation.Value, "PrimaryDataSet")) &amp; IIf(convert.IsDBNull(First(Fields!FirstName.Value, "PrimaryDataSet")),"" , " " &amp; First(Fields!FirstName.Value, "PrimaryDataSet")) &amp; " " &amp; First(Fields!LastName.Value, "PrimaryDataSet")</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Salutation</rd:DefaultName>
-            <Top>1.32167in</Top>
-            <Left>1.16445in</Left>
+            <rd:DefaultName>Textbox12</rd:DefaultName>
+            <Top>2.14506in</Top>
+            <Left>0.06472in</Left>
             <Height>0.25in</Height>
-            <Width>2.91667in</Width>
-            <ZIndex>17</ZIndex>
+            <Width>0.58333in</Width>
+            <ZIndex>10</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -689,28 +451,26 @@ FROM            dbo.tblActRequest LEFT OUTER JOIN
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Address">
+          <Textbox Name="AssetDescription">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!Address.Value, "PrimaryDataSet")</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
+                    <Value>=Fields!AssetDescription.Value</Value>
+                    <Style />
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Address</rd:DefaultName>
-            <Top>1.64111in</Top>
-            <Left>1.16445in</Left>
+            <rd:DefaultName>AssetDescription</rd:DefaultName>
+            <Top>2.15895in</Top>
+            <Left>1.34662in</Left>
             <Height>0.25in</Height>
-            <Width>2.91667in</Width>
-            <ZIndex>18</ZIndex>
+            <Width>6.06484in</Width>
+            <ZIndex>11</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -721,180 +481,14 @@ FROM            dbo.tblActRequest LEFT OUTER JOIN
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Suburb">
+          <Textbox Name="Textbox9">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!Suburb.Value, "PrimaryDataSet")</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Suburb</rd:DefaultName>
-            <Top>1.96056in</Top>
-            <Left>1.16445in</Left>
-            <Height>0.25in</Height>
-            <Width>2.91667in</Width>
-            <ZIndex>19</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox15">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>SUBURB:</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>1.96056in</Top>
-            <Left>0.26813in</Left>
-            <Height>0.25in</Height>
-            <Width>0.82688in</Width>
-            <ZIndex>20</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox16">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>ADDRESS:</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>1.655in</Top>
-            <Left>0.26813in</Left>
-            <Height>0.25in</Height>
-            <Width>0.82688in</Width>
-            <ZIndex>21</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Request">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!Request.Value, "PrimaryDataSet")</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Request</rd:DefaultName>
-            <Top>2.32167in</Top>
-            <Left>1.16445in</Left>
-            <Height>1.1875in</Height>
-            <Width>6.57389in</Width>
-            <ZIndex>22</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox17">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>DETAILS:</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>2.32167in</Top>
-            <Left>0.26813in</Left>
-            <Height>0.25in</Height>
-            <Width>0.82688in</Width>
-            <ZIndex>23</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox18">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>SECTION B - REFERRAL</Value>
+                    <Value>WORK ORDER DETAILS</Value>
                     <Style>
                       <FontSize>14pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -906,105 +500,44 @@ FROM            dbo.tblActRequest LEFT OUTER JOIN
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>3.79688in</Top>
+            <Top>2.56077in</Top>
+            <Left>0.03528cm</Left>
             <Height>0.33333in</Height>
-            <Width>7.94792in</Width>
-            <ZIndex>24</ZIndex>
+            <Width>7.39757in</Width>
+            <ZIndex>12</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <BackgroundColor>#384c70</BackgroundColor>
+              <BackgroundColor>#215e89</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="OBSName">
+          <Textbox Name="ActionDescription">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!OBSName.Value, "PrimaryDataSet")</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>OBSName</rd:DefaultName>
-            <Top>4.30084in</Top>
-            <Left>1.16445in</Left>
-            <Height>0.25in</Height>
-            <Width>2.91667in</Width>
-            <ZIndex>25</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Urgent">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!Urgent.Value, "PrimaryDataSet")</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Urgent</rd:DefaultName>
-            <Top>4.69667in</Top>
-            <Left>1.16445in</Left>
-            <Height>0.25in</Height>
-            <Width>2.91667in</Width>
-            <ZIndex>26</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox19">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>REFERRED TO:</Value>
+                    <Value>=Fields!ActionDescription.Value</Value>
                     <Style>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>12pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
+                <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>4.30084in</Top>
-            <Left>0.095in</Left>
-            <Height>0.25in</Height>
-            <Width>1in</Width>
-            <ZIndex>27</ZIndex>
+            <rd:DefaultName>ActionDescription</rd:DefaultName>
+            <Top>2.96354in</Top>
+            <Left>0.06472in</Left>
+            <Height>0.30208in</Height>
+            <Width>7.34674in</Width>
+            <ZIndex>13</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1022,23 +555,21 @@ FROM            dbo.tblActRequest LEFT OUTER JOIN
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>URGENCY:</Value>
+                    <Value>Scheduled Start:</Value>
                     <Style>
-                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
+                <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>4.69667in</Top>
-            <Left>0.095in</Left>
+            <rd:DefaultName>Textbox20</rd:DefaultName>
+            <Top>3.36681in</Top>
+            <Left>0.06472in</Left>
             <Height>0.25in</Height>
-            <Width>1in</Width>
-            <ZIndex>28</ZIndex>
+            <Width>1.17708in</Width>
+            <ZIndex>14</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1056,23 +587,21 @@ FROM            dbo.tblActRequest LEFT OUTER JOIN
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>OFFICER:</Value>
+                    <Value>Scheduled Finish:</Value>
                     <Style>
-                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
+                <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>4.30084in</Top>
-            <Left>4.45313in</Left>
+            <rd:DefaultName>Textbox20</rd:DefaultName>
+            <Top>3.36681in</Top>
+            <Left>3.8993in</Left>
             <Height>0.25in</Height>
-            <Width>1in</Width>
-            <ZIndex>29</ZIndex>
+            <Width>1.27083in</Width>
+            <ZIndex>15</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1083,42 +612,28 @@ FROM            dbo.tblActRequest LEFT OUTER JOIN
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Line Name="Line1">
-            <Top>4.98834in</Top>
-            <Left>4.45313in</Left>
-            <Height>0in</Height>
-            <Width>3.28521in</Width>
-            <ZIndex>30</ZIndex>
-            <Style>
-              <Border>
-                <Style>Dotted</Style>
-              </Border>
-            </Style>
-          </Line>
-          <Textbox Name="Textbox22">
+          <Textbox Name="FinishDate">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Received (Initial and Date)</Value>
+                    <Value>=Fields!FinishDate.Value</Value>
                     <Style>
-                      <FontSize>9pt</FontSize>
+                      <Format>dd-MMMM-yyyy</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
+                <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>5.05778in</Top>
-            <Left>4.45313in</Left>
-            <Height>0.20833in</Height>
-            <Width>1.57292in</Width>
-            <ZIndex>31</ZIndex>
+            <rd:DefaultName>FinishDate</rd:DefaultName>
+            <Top>3.36681in</Top>
+            <Left>5.23958in</Left>
+            <Height>0.25in</Height>
+            <Width>2.203in</Width>
+            <ZIndex>16</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1129,14 +644,161 @@ FROM            dbo.tblActRequest LEFT OUTER JOIN
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox23">
+          <Textbox Name="FinishDate2">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>SECTION C - COMMENTS / ACTION TAKEN / COMPLETION DETAILS</Value>
+                    <Value>=Fields!StartDate.Value</Value>
+                    <Style>
+                      <Format>dd-MMMM-yyyy</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>FinishDate</rd:DefaultName>
+            <Top>3.36681in</Top>
+            <Left>1.35509in</Left>
+            <Height>0.25in</Height>
+            <Width>2.203in</Width>
+            <ZIndex>17</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox1">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Instructions</Value>
+                    <Style>
+                      <FontStyle>Italic</FontStyle>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>3.73139in</Top>
+            <Left>0.06472in</Left>
+            <Height>0.33333in</Height>
+            <Width>1.37217in</Width>
+            <ZIndex>18</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Tablix Name="Tablix1">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>7.42869in</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.23958in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Rectangle Name="Rectangle2">
+                          <ReportItems>
+                            <Textbox Name="Taskname">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!Taskname.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Taskname</rd:DefaultName>
+                              <Left>0.05083in</Left>
+                              <Height>0.23958in</Height>
+                              <Width>7.34674in</Width>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </ReportItems>
+                          <KeepTogether>true</KeepTogether>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                          </Style>
+                        </Rectangle>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <Group Name="Details" />
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>PrimaryDataSet</DataSetName>
+            <Top>4.21056in</Top>
+            <Left>0.01389in</Left>
+            <Height>0.23958in</Height>
+            <Width>7.42869in</Width>
+            <ZIndex>19</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+          <Textbox Name="Textbox10">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>GENERAL NOTES</Value>
                     <Style>
                       <FontSize>14pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -1148,167 +810,42 @@ FROM            dbo.tblActRequest LEFT OUTER JOIN
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>5.70834in</Top>
+            <Top>4.57639in</Top>
+            <Left>0.03528cm</Left>
             <Height>0.33333in</Height>
-            <Width>7.94792in</Width>
-            <ZIndex>32</ZIndex>
+            <Width>7.39757in</Width>
+            <ZIndex>20</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <BackgroundColor>#384c70</BackgroundColor>
+              <BackgroundColor>#215e89</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Line Name="Line2">
-            <Top>6.44667in</Top>
-            <Left>0.095in</Left>
-            <Height>0in</Height>
-            <Width>7.64333in</Width>
-            <ZIndex>33</ZIndex>
-            <Style>
-              <Border>
-                <Style>Dotted</Style>
-              </Border>
-            </Style>
-          </Line>
-          <Line Name="Line3">
-            <Top>8.43229in</Top>
-            <Left>0.095in</Left>
-            <Height>0in</Height>
-            <Width>7.64333in</Width>
-            <ZIndex>34</ZIndex>
-            <Style>
-              <Border>
-                <Style>Dotted</Style>
-              </Border>
-            </Style>
-          </Line>
-          <Line Name="Line4">
-            <Top>8.14863in</Top>
-            <Left>0.095in</Left>
-            <Height>0in</Height>
-            <Width>7.64333in</Width>
-            <ZIndex>35</ZIndex>
-            <Style>
-              <Border>
-                <Style>Dotted</Style>
-              </Border>
-            </Style>
-          </Line>
-          <Line Name="Line5">
-            <Top>7.86497in</Top>
-            <Left>0.095in</Left>
-            <Height>0in</Height>
-            <Width>7.64333in</Width>
-            <ZIndex>36</ZIndex>
-            <Style>
-              <Border>
-                <Style>Dotted</Style>
-              </Border>
-            </Style>
-          </Line>
-          <Line Name="Line6">
-            <Top>7.58131in</Top>
-            <Left>0.095in</Left>
-            <Height>0in</Height>
-            <Width>7.64333in</Width>
-            <ZIndex>37</ZIndex>
-            <Style>
-              <Border>
-                <Style>Dotted</Style>
-              </Border>
-            </Style>
-          </Line>
-          <Line Name="Line7">
-            <Top>7.29765in</Top>
-            <Left>0.095in</Left>
-            <Height>0in</Height>
-            <Width>7.64333in</Width>
-            <ZIndex>38</ZIndex>
-            <Style>
-              <Border>
-                <Style>Dotted</Style>
-              </Border>
-            </Style>
-          </Line>
-          <Line Name="Line8">
-            <Top>7.01399in</Top>
-            <Left>0.095in</Left>
-            <Height>0in</Height>
-            <Width>7.64333in</Width>
-            <ZIndex>39</ZIndex>
-            <Style>
-              <Border>
-                <Style>Dotted</Style>
-              </Border>
-            </Style>
-          </Line>
-          <Line Name="Line9">
-            <Top>6.73033in</Top>
-            <Left>0.095in</Left>
-            <Height>0in</Height>
-            <Width>7.64333in</Width>
-            <ZIndex>40</ZIndex>
-            <Style>
-              <Border>
-                <Style>Dotted</Style>
-              </Border>
-            </Style>
-          </Line>
-          <Textbox Name="Textbox34">
+          <Textbox Name="ActionNotes">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>RESPONSIBLE OFFICER............................................(SIGNED)</Value>
+                    <Value>=First(Fields!ActionNotes.Value, "PrimaryDataSet")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox34</rd:DefaultName>
-            <Top>8.76959in</Top>
-            <Left>0.095in</Left>
-            <Height>0.25in</Height>
-            <Width>4.22666in</Width>
-            <ZIndex>41</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox35">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>DATE COMPLETE ........../........../...............</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox35</rd:DefaultName>
-            <Top>8.80084in</Top>
-            <Left>4.69667in</Left>
-            <Height>0.25in</Height>
-            <Width>3.04167in</Width>
-            <ZIndex>42</ZIndex>
+            <rd:DefaultName>ActionNotes</rd:DefaultName>
+            <Top>5.05431in</Top>
+            <Left>0.1168in</Left>
+            <Height>0.4375in</Height>
+            <Width>7.29466in</Width>
+            <ZIndex>21</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1320,41 +857,145 @@ FROM            dbo.tblActRequest LEFT OUTER JOIN
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>23.86543cm</Height>
+        <Height>14.31397cm</Height>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Body>
-      <Width>20.18772cm</Width>
+      <Width>18.90415cm</Width>
       <Page>
         <PageHeader>
-          <Height>1.50813cm</Height>
+          <Height>2.61938cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
-            <Image Name="Image1">
-              <Source>Embedded</Source>
-              <Value>conquest</Value>
-              <Sizing>FitProportional</Sizing>
-              <Left>0in</Left>
-              <Height>0.46875in</Height>
-              <Width>2.29292in</Width>
+            <Rectangle Name="Rectangle1">
+              <ReportItems>
+                <Textbox Name="ReferenceID">
+                  <CanGrow>true</CanGrow>
+                  <KeepTogether>true</KeepTogether>
+                  <Paragraphs>
+                    <Paragraph>
+                      <TextRuns>
+                        <TextRun>
+                          <Value>=First(Fields!ReferenceID.Value, "PrimaryDataSet")</Value>
+                          <Style>
+                            <FontSize>12pt</FontSize>
+                            <FontWeight>Bold</FontWeight>
+                            <Color>White</Color>
+                          </Style>
+                        </TextRun>
+                      </TextRuns>
+                      <Style>
+                        <TextAlign>Right</TextAlign>
+                      </Style>
+                    </Paragraph>
+                  </Paragraphs>
+                  <rd:DefaultName>ReferenceID</rd:DefaultName>
+                  <Top>1.19917cm</Top>
+                  <Left>0.18521cm</Left>
+                  <Height>0.75875cm</Height>
+                  <Width>4.73604cm</Width>
+                  <Style>
+                    <Border>
+                      <Style>None</Style>
+                    </Border>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <PaddingBottom>2pt</PaddingBottom>
+                  </Style>
+                </Textbox>
+                <Textbox Name="Textbox3">
+                  <CanGrow>true</CanGrow>
+                  <KeepTogether>true</KeepTogether>
+                  <Paragraphs>
+                    <Paragraph>
+                      <TextRuns>
+                        <TextRun>
+                          <Value>Work Order Reference</Value>
+                          <Style>
+                            <FontSize>12pt</FontSize>
+                            <FontWeight>Bold</FontWeight>
+                            <Color>White</Color>
+                          </Style>
+                        </TextRun>
+                      </TextRuns>
+                      <Style />
+                    </Paragraph>
+                  </Paragraphs>
+                  <rd:DefaultName>Textbox3</rd:DefaultName>
+                  <Top>0.2435cm</Top>
+                  <Left>0.18521cm</Left>
+                  <Height>0.77928cm</Height>
+                  <Width>4.73604cm</Width>
+                  <ZIndex>1</ZIndex>
+                  <Style>
+                    <Border>
+                      <Style>None</Style>
+                    </Border>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <PaddingBottom>2pt</PaddingBottom>
+                  </Style>
+                </Textbox>
+              </ReportItems>
+              <KeepTogether>true</KeepTogether>
+              <Top>0.24349cm</Top>
+              <Left>13.92589cm</Left>
+              <Height>1.95792cm</Height>
+              <Width>4.92125cm</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
                 </Border>
+                <BackgroundColor>#215e89</BackgroundColor>
               </Style>
-            </Image>
-            <Textbox Name="Textbox1">
+            </Rectangle>
+            <Textbox Name="FamilyCode">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>CUSTOMER REQUEST</Value>
+                      <Value>=First(Fields!FamilyCode.Value, "PrimaryDataSet")</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>FamilyCode</rd:DefaultName>
+              <Top>1.60141cm</Top>
+              <Left>0.03528cm</Left>
+              <Height>0.6cm</Height>
+              <Width>2.5cm</Width>
+              <ZIndex>1</ZIndex>
+              <Visibility>
+                <Hidden>true</Hidden>
+              </Visibility>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox5">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Contractor's Instruction</Value>
                       <Style>
                         <FontSize>18pt</FontSize>
                         <FontWeight>Bold</FontWeight>
@@ -1364,12 +1005,12 @@ FROM            dbo.tblActRequest LEFT OUTER JOIN
                   <Style />
                 </Paragraph>
               </Paragraphs>
-              <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>0.125in</Top>
-              <Left>5.17709in</Left>
-              <Height>0.34375in</Height>
-              <Width>2.77083in</Width>
-              <ZIndex>1</ZIndex>
+              <rd:DefaultName>Textbox5</rd:DefaultName>
+              <Top>0.30467cm</Top>
+              <Left>0.03526cm</Left>
+              <Height>0.99688cm</Height>
+              <Width>7.76838cm</Width>
+              <ZIndex>2</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1387,12 +1028,243 @@ FROM            dbo.tblActRequest LEFT OUTER JOIN
             </Border>
           </Style>
         </PageHeader>
-        <PageHeight>27.94cm</PageHeight>
-        <PageWidth>21.59cm</PageWidth>
-        <LeftMargin>0.5cm</LeftMargin>
-        <RightMargin>0.5cm</RightMargin>
-        <TopMargin>0.5cm</TopMargin>
-        <BottomMargin>0.5cm</BottomMargin>
+        <PageFooter>
+          <Height>5.96166cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="Textbox11">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>COMMENTS</Value>
+                      <Style>
+                        <FontSize>14pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                        <Color>White</Color>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox6</rd:DefaultName>
+              <Height>0.33333in</Height>
+              <Width>7.41146in</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <BackgroundColor>#215e89</BackgroundColor>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Line Name="Line3">
+              <Top>2.66347cm</Top>
+              <Left>0.30427cm</Left>
+              <Height>0cm</Height>
+              <Width>18.52083cm</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>Dashed</Style>
+                </Border>
+              </Style>
+            </Line>
+            <Line Name="Line4">
+              <Top>1.69333cm</Top>
+              <Left>0.30427cm</Left>
+              <Height>0cm</Height>
+              <Width>18.52083cm</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Style>Dashed</Style>
+                </Border>
+              </Style>
+            </Line>
+            <Line Name="Line5">
+              <Top>3.63361cm</Top>
+              <Left>0.30427cm</Left>
+              <Height>0cm</Height>
+              <Width>18.52083cm</Width>
+              <ZIndex>3</ZIndex>
+              <Style>
+                <Border>
+                  <Style>Dashed</Style>
+                </Border>
+              </Style>
+            </Line>
+            <Line Name="Line6">
+              <Top>4.60375cm</Top>
+              <Left>0.31432cm</Left>
+              <Height>0cm</Height>
+              <Width>18.52083cm</Width>
+              <ZIndex>4</ZIndex>
+              <Style>
+                <Border>
+                  <Style>Dashed</Style>
+                </Border>
+              </Style>
+            </Line>
+            <Textbox Name="Textbox19">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Completion Date</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox19</rd:DefaultName>
+              <Top>5.24729cm</Top>
+              <Left>0.31432cm</Left>
+              <Height>0.6cm</Height>
+              <Width>3.16146cm</Width>
+              <ZIndex>5</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox22">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Signature</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox19</rd:DefaultName>
+              <Top>5.24729cm</Top>
+              <Left>8.30146cm</Left>
+              <Height>0.6cm</Height>
+              <Width>1.81208cm</Width>
+              <ZIndex>6</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox23">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Follow up required</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox19</rd:DefaultName>
+              <Top>5.24729cm</Top>
+              <Left>14.90282cm</Left>
+              <Height>0.6cm</Height>
+              <Width>3.24083cm</Width>
+              <ZIndex>7</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Rectangle Name="Rectangle3">
+              <KeepTogether>true</KeepTogether>
+              <Top>5.59124cm</Top>
+              <Left>18.61024cm</Left>
+              <Height>0.25604cm</Height>
+              <Width>0.22491cm</Width>
+              <ZIndex>8</ZIndex>
+              <Style>
+                <Border>
+                  <Style>Solid</Style>
+                </Border>
+                <TopBorder>
+                  <Style>Solid</Style>
+                </TopBorder>
+                <BottomBorder>
+                  <Style>Solid</Style>
+                </BottomBorder>
+                <LeftBorder>
+                  <Style>Solid</Style>
+                </LeftBorder>
+                <RightBorder>
+                  <Style>Solid</Style>
+                </RightBorder>
+              </Style>
+            </Rectangle>
+            <Line Name="Line7">
+              <Top>5.96166cm</Top>
+              <Left>3.94793cm</Left>
+              <Height>0cm</Height>
+              <Width>4.78896cm</Width>
+              <ZIndex>9</ZIndex>
+              <Style>
+                <Border>
+                  <Style>Dashed</Style>
+                </Border>
+              </Style>
+            </Line>
+            <Line Name="Line8">
+              <Top>5.96166cm</Top>
+              <Left>10.64189cm</Left>
+              <Height>0cm</Height>
+              <Width>4.73604cm</Width>
+              <ZIndex>10</ZIndex>
+              <Style>
+                <Border>
+                  <Style>Dashed</Style>
+                </Border>
+              </Style>
+            </Line>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageFooter>
+        <PageHeight>29.7cm</PageHeight>
+        <PageWidth>21cm</PageWidth>
+        <LeftMargin>1cm</LeftMargin>
+        <RightMargin>1cm</RightMargin>
+        <TopMargin>1cm</TopMargin>
+        <BottomMargin>1cm</BottomMargin>
         <ColumnSpacing>1.27cm</ColumnSpacing>
         <Style />
       </Page>
