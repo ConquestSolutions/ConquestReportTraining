@@ -162,6 +162,7 @@ left join
                     <Style>
                       <FontFamily>Verdana</FontFamily>
                       <FontSize>20pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -192,6 +193,7 @@ left join
                   <TextRun>
                     <Value>Asset Description:</Value>
                     <Style>
+                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -224,6 +226,7 @@ left join
                   <TextRun>
                     <Value>Finance Description:</Value>
                     <Style>
+                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -255,7 +258,9 @@ left join
                 <TextRuns>
                   <TextRun>
                     <Value>=First(Fields!sysusertext1.Value, "PrimaryDataSet")</Value>
-                    <Style />
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -286,6 +291,7 @@ left join
                   <TextRun>
                     <Value>Conquest ID:</Value>
                     <Style>
+                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -295,7 +301,7 @@ left join
             </Paragraphs>
             <rd:DefaultName>Textbox15</rd:DefaultName>
             <Top>15.84325mm</Top>
-            <Left>103.80761mm</Left>
+            <Left>95.60553mm</Left>
             <Height>6mm</Height>
             <Width>25.97013mm</Width>
             <ZIndex>4</ZIndex>
@@ -318,6 +324,7 @@ left join
                   <TextRun>
                     <Value>Finance ID:</Value>
                     <Style>
+                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -327,7 +334,7 @@ left join
             </Paragraphs>
             <rd:DefaultName>Textbox15</rd:DefaultName>
             <Top>15.84325mm</Top>
-            <Left>156.89441mm</Left>
+            <Left>148.69233mm</Left>
             <Height>6mm</Height>
             <Width>24.73541mm</Width>
             <ZIndex>5</ZIndex>
@@ -349,7 +356,9 @@ left join
                 <TextRuns>
                   <TextRun>
                     <Value>=Sum(Fields!AssetID.Value, "PrimaryDataSet")</Value>
-                    <Style />
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -357,7 +366,7 @@ left join
             </Paragraphs>
             <rd:DefaultName>AssetID</rd:DefaultName>
             <Top>15.84325mm</Top>
-            <Left>130.13052mm</Left>
+            <Left>121.92844mm</Left>
             <Height>6mm</Height>
             <Width>25mm</Width>
             <ZIndex>6</ZIndex>
@@ -379,7 +388,9 @@ left join
                 <TextRuns>
                   <TextRun>
                     <Value>=First(Fields!businessid.Value, "PrimaryDataSet")</Value>
-                    <Style />
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -387,7 +398,7 @@ left join
             </Paragraphs>
             <rd:DefaultName>businessid</rd:DefaultName>
             <Top>15.84325mm</Top>
-            <Left>181.62982mm</Left>
+            <Left>173.42774mm</Left>
             <Height>6mm</Height>
             <Width>25mm</Width>
             <ZIndex>7</ZIndex>
@@ -409,7 +420,9 @@ left join
                 <TextRuns>
                   <TextRun>
                     <Value>=First(Fields!assetdescription.Value, "PrimaryDataSet")</Value>
-                    <Style />
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -435,25 +448,25 @@ left join
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>28.96282mm</Width>
+                  <Width>27.79109mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>28.96282mm</Width>
+                  <Width>27.79109mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>28.96282mm</Width>
+                  <Width>27.79109mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>29.75657mm</Width>
+                  <Width>28.58484mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>29.75657mm</Width>
+                  <Width>28.58484mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>29.75657mm</Width>
+                  <Width>28.58484mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>30.20708mm</Width>
+                  <Width>29.03535mm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -948,7 +961,7 @@ left join
             <Top>37.2745mm</Top>
             <Left>0.26458mm</Left>
             <Height>12mm</Height>
-            <Width>206.36524mm</Width>
+            <Width>198.16317mm</Width>
             <ZIndex>9</ZIndex>
             <Style>
               <Border>
@@ -965,6 +978,7 @@ left join
                   <TextRun>
                     <Value>Detailed asset valuation information is attached to the asset in a linked document</Value>
                     <Style>
+                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -976,7 +990,7 @@ left join
             <Top>53.41409mm</Top>
             <Left>0.26459mm</Left>
             <Height>6mm</Height>
-            <Width>206.36523mm</Width>
+            <Width>198.18826mm</Width>
             <ZIndex>10</ZIndex>
             <Style>
               <Border>
@@ -1010,7 +1024,7 @@ left join
             <Top>64.49975mm</Top>
             <Left>0.23949mm</Left>
             <Height>8.38125mm</Height>
-            <Width>206.39034mm</Width>
+            <Width>198.18826mm</Width>
             <ZIndex>11</ZIndex>
             <Style>
               <Border>
@@ -1032,7 +1046,7 @@ left join
                   <TextRun>
                     <Value>Overall Condition</Value>
                     <Style>
-                      <FontSize>14pt</FontSize>
+                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -1064,7 +1078,9 @@ left join
                 <TextRuns>
                   <TextRun>
                     <Value>=First(Fields!text.Value, "PrimaryDataSet")</Value>
-                    <Style />
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -1094,7 +1110,9 @@ left join
                 <TextRuns>
                   <TextRun>
                     <Value>=Sum(Fields!dimension1.Value, "PrimaryDataSet")</Value>
-                    <Style />
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -1102,7 +1120,7 @@ left join
             </Paragraphs>
             <rd:DefaultName>dimension1</rd:DefaultName>
             <Top>79.07867mm</Top>
-            <Left>154.86594mm</Left>
+            <Left>146.66386mm</Left>
             <Height>6mm</Height>
             <Width>25mm</Width>
             <ZIndex>14</ZIndex>
@@ -1124,7 +1142,9 @@ left join
                 <TextRuns>
                   <TextRun>
                     <Value>=First(Fields!UOM.Value, "PrimaryDataSet")</Value>
-                    <Style />
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -1132,7 +1152,7 @@ left join
             </Paragraphs>
             <rd:DefaultName>UOM</rd:DefaultName>
             <Top>79.07867mm</Top>
-            <Left>181.62983mm</Left>
+            <Left>173.42775mm</Left>
             <Height>6mm</Height>
             <Width>25mm</Width>
             <ZIndex>15</ZIndex>
@@ -1154,7 +1174,9 @@ left join
                 <TextRuns>
                   <TextRun>
                     <Value>=First(Fields!dimensionlabel.Value, "PrimaryDataSet")</Value>
-                    <Style />
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -1162,7 +1184,7 @@ left join
             </Paragraphs>
             <rd:DefaultName>dimensionlabel</rd:DefaultName>
             <Top>79.07867mm</Top>
-            <Left>99.63817mm</Left>
+            <Left>91.43609mm</Left>
             <Height>6mm</Height>
             <Width>52.25207mm</Width>
             <ZIndex>16</ZIndex>
@@ -1185,7 +1207,7 @@ left join
                   <TextRun>
                     <Value>Asset Details</Value>
                     <Style>
-                      <FontSize>14pt</FontSize>
+                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -1231,7 +1253,7 @@ left join
             <Top>105.90705mm</Top>
             <Left>0.23949mm</Left>
             <Height>8.38125mm</Height>
-            <Width>206.39034mm</Width>
+            <Width>198.18826mm</Width>
             <ZIndex>18</ZIndex>
             <Style>
               <Border>
@@ -1253,7 +1275,7 @@ left join
                   <TextRun>
                     <Value>Year</Value>
                     <Style>
-                      <FontSize>14pt</FontSize>
+                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <Color>DarkBlue</Color>
                     </Style>
@@ -1289,6 +1311,7 @@ left join
                   <TextRun>
                     <Value>=First(Fields!yearcreated.Value, "PrimaryDataSet")</Value>
                     <Style>
+                      <FontSize>9pt</FontSize>
                       <Format>d/MM/yyyy</Format>
                     </Style>
                   </TextRun>
@@ -1323,7 +1346,7 @@ left join
                   <TextRun>
                     <Value>Description</Value>
                     <Style>
-                      <FontSize>14pt</FontSize>
+                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <Color>DarkBlue</Color>
                     </Style>
@@ -1358,7 +1381,9 @@ left join
                 <TextRuns>
                   <TextRun>
                     <Value>=First(Fields!assetdescription.Value, "PrimaryDataSet")</Value>
-                    <Style />
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -1389,7 +1414,7 @@ left join
                   <TextRun>
                     <Value>Cost</Value>
                     <Style>
-                      <FontSize>14pt</FontSize>
+                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <Color>DarkBlue</Color>
                     </Style>
@@ -1402,7 +1427,7 @@ left join
             </Paragraphs>
             <rd:DefaultName>Textbox49</rd:DefaultName>
             <Top>120.61825mm</Top>
-            <Left>173.88311mm</Left>
+            <Left>165.68103mm</Left>
             <Height>7.5875mm</Height>
             <Width>32.74672mm</Width>
             <ZIndex>23</ZIndex>
@@ -1425,6 +1450,7 @@ left join
                   <TextRun>
                     <Value>=Sum(Fields!cost.Value, "PrimaryDataSet")</Value>
                     <Style>
+                      <FontSize>9pt</FontSize>
                       <Format>'$'#,0.00;('$'#,0.00)</Format>
                     </Style>
                   </TextRun>
@@ -1436,7 +1462,7 @@ left join
             </Paragraphs>
             <rd:DefaultName>cost1</rd:DefaultName>
             <Top>128.91131mm</Top>
-            <Left>173.88311mm</Left>
+            <Left>165.68103mm</Left>
             <Height>6mm</Height>
             <Width>32.77182mm</Width>
             <ZIndex>24</ZIndex>
@@ -1455,7 +1481,7 @@ left join
             <Top>140.99117mm</Top>
             <Left>0.26458mm</Left>
             <Height>0mm</Height>
-            <Width>206.36524mm</Width>
+            <Width>198.18827mm</Width>
             <ZIndex>25</ZIndex>
             <Style>
               <Border>
@@ -1486,7 +1512,7 @@ left join
             <MIMEType>image/jpeg</MIMEType>
             <Sizing>FitProportional</Sizing>
             <Top>150.78075mm</Top>
-            <Left>21.89512mm</Left>
+            <Left>18.72012mm</Left>
             <Height>101.25418mm</Height>
             <Width>159.7347mm</Width>
             <ZIndex>26</ZIndex>
@@ -1505,6 +1531,7 @@ left join
                   <TextRun>
                     <Value>Asset Description:</Value>
                     <Style>
+                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -1536,7 +1563,9 @@ left join
                 <TextRuns>
                   <TextRun>
                     <Value>=First(Fields!assetdescription.Value, "PrimaryDataSet")</Value>
-                    <Style />
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -1567,6 +1596,7 @@ left join
                   <TextRun>
                     <Value>Conquest ID:</Value>
                     <Style>
+                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -1598,7 +1628,9 @@ left join
                 <TextRuns>
                   <TextRun>
                     <Value>=Sum(Fields!AssetID.Value, "PrimaryDataSet")</Value>
-                    <Style />
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -1629,6 +1661,7 @@ left join
                   <TextRun>
                     <Value>Finance ID:</Value>
                     <Style>
+                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -1660,7 +1693,9 @@ left join
                 <TextRuns>
                   <TextRun>
                     <Value>=First(Fields!businessid.Value, "PrimaryDataSet")</Value>
-                    <Style />
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -1690,7 +1725,7 @@ left join
           </Border>
         </Style>
       </Body>
-      <Width>206.65493mm</Width>
+      <Width>198.45285mm</Width>
       <Page>
         <PageFooter>
           <Height>32.33209mm</Height>
@@ -1707,6 +1742,7 @@ left join
                       <Value>=Globals!ExecutionTime</Value>
                       <Style>
                         <FontStyle>Italic</FontStyle>
+                        <FontSize>9pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
@@ -1735,7 +1771,7 @@ left join
               <Top>4.13958mm</Top>
               <Left>0mm</Left>
               <Height>0mm</Height>
-              <Width>206.65493mm</Width>
+              <Width>198.45285mm</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
@@ -1770,6 +1806,7 @@ left join
                     <TextRun>
                       <Value>=Globals!PageNumber</Value>
                       <Style>
+                        <FontSize>9pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
@@ -1779,7 +1816,7 @@ left join
               </Paragraphs>
               <rd:DefaultName>PageNumber</rd:DefaultName>
               <Top>14.42584mm</Top>
-              <Left>168.44123mm</Left>
+              <Left>160.26426mm</Left>
               <Height>6mm</Height>
               <Width>38.18859mm</Width>
               <ZIndex>2</ZIndex>
@@ -1802,10 +1839,10 @@ left join
         </PageFooter>
         <PageHeight>29.7cm</PageHeight>
         <PageWidth>21cm</PageWidth>
-        <LeftMargin>1cm</LeftMargin>
-        <RightMargin>1cm</RightMargin>
-        <TopMargin>1cm</TopMargin>
-        <BottomMargin>1cm</BottomMargin>
+        <LeftMargin>0.5cm</LeftMargin>
+        <RightMargin>0.5cm</RightMargin>
+        <TopMargin>0.5cm</TopMargin>
+        <BottomMargin>0.5cm</BottomMargin>
         <ColumnSpacing>0.13cm</ColumnSpacing>
         <Style />
       </Page>
